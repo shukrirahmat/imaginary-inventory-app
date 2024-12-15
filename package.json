@@ -1,0 +1,17 @@
+{
+  "name": "imaginary-inventory-app",
+  "version": "1.0.0",
+  "description": "a CRUD inventory management app for an imaginary store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  }
+}
