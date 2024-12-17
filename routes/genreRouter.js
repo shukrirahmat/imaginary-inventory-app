@@ -1,9 +1,8 @@
 const {Router} = require("express");
 const router = Router();
+const genreController = require("../controllers/genreControllers")
 
-router.get("/", (req, res) => {
-    res.send("THIS PAGE SHOW ALL RECORDS");
-})
+router.get("/", genreController.getAllRecords);
 
 router.get("/:name", (req, res) => {
     const {name} = req.params;
