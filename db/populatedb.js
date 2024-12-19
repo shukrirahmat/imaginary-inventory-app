@@ -14,7 +14,7 @@ INSERT INTO records (record_name, artist, year, imgurl)
 VALUES
 ('In Chromes', 'Audiofeet', 2007, '/assets/cover_1.jpeg'),
 ('Felines of Passion', 'Beth Kush', 1985, '/assets/cover_2.jpeg'),
-('The Tumbling Rocks', 'Sweaty Palms', 1971, '/assets/cover_3.jpeg'),
+('Sweaty Palms', 'The Tumbling Rocks', 1971, '/assets/cover_3.jpeg'),
 ('Crystal Glares', 'Nimbeats', 2010, '/assets/cover_4.jpeg'),
 ('The Era of Ong', 'Stefan Sullivans', 2010, '/assets/cover_5.jpeg'),
 ('lifesenselessness', 'Have an Ugly Death', 2008, '/assets/cover_6.jpeg'),
@@ -59,7 +59,7 @@ VALUES
 async function main() {
   console.log("Seeding...");
   const client = new Client({
-    connectionString: `postgresql://${process.env.USER}:${process.env.PW}@${process.env.HOST}:$5432/${process.env.DB}`,
+    connectionString: `postgresql://${process.env.USER}:${process.env.PW}@${process.env.HOST}:5432/${process.env.DB}`,
   });
   await client.connect();
   await client.query(SQL);
