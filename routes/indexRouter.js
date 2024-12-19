@@ -1,8 +1,9 @@
 const {Router} = require("express");
 const router = Router();
+const indexController = require("../controllers/indexController")
 
-router.get("/", (req, res) => {
-    res.send("THIS PAGE WILL BE HOME WHERE A GENRE CAN BE SELECTED");
-})
+router.get("/", indexController.getIndexPage);
+router.get("/all", indexController.getAllRecords);
+router.get("/:genreId", indexController.getRecordsInGenre)
 
 module.exports = router;
