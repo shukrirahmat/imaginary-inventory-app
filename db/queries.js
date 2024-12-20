@@ -12,14 +12,14 @@ async function getAllRecords() {
     GROUP BY records.id, records.record_name, records.artist, records.year, records.imgurl
     ORDER BY records.id;
     `
-    const {rows} = await pool.query(query);
-    return rows;
+    const {rows, rowCount} = await pool.query(query);
+    return {rows, rowCount};
 }
 
 async function getRecordsInGenre(genreId) {
     const query = 
     `
-    SELECT newtable.*, records_genres.genre_id, genres.genre_name FROM
+    SELECT newtable.*, records_genres.genre_id FROM
     (SELECT records.id, records.record_name, records.artist, records.year, records.imgurl, string_agg(genres.genre_name, ', ') AS genre_str
     FROM records
     INNER JOIN records_genres
@@ -34,9 +34,8 @@ async function getRecordsInGenre(genreId) {
     ON genre_id = genres.id
     WHERE genre_id = ${genreId};
     `;
-    const {rows} = await pool.query(query);
-    console.log(rows)
-    return rows;
+    const {rows, rowCount} = await pool.query(query);
+    return {rows, rowCount};
 }
 
 async function getAllGenres() {
@@ -44,8 +43,19 @@ async function getAllGenres() {
     return rows;
 }
 
+async function getGenreName(genreId) {
+    const query = 
+    `
+        SELECT genre_name FROM genres
+        WHERE id = ${genreId}
+    `;
+    const {rows} = await pool.query(query);
+    return rows;
+}
+
 module.exports = {
     getAllRecords,
     getAllGenres,
-    getRecordsInGenre
+    getRecordsInGenre,
+    getGenreName
 }
