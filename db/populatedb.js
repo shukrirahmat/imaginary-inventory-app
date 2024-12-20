@@ -20,7 +20,8 @@ VALUES
 ('lifesenselessness', 'Have an Ugly Death', 2008, '/assets/cover_6.jpeg'),
 ('Turning O', 'Sandal Pumps', 1996, '/assets/cover_7.jpeg'),
 ('Save it Like it''s Private', 'Made to Spoil', 1999, '/assets/cover_8.jpeg'),
-('Theatrical', 'Ladyz', 2017, '/assets/cover_9.jpeg');
+('Theatrical', 'Ladyz', 2017, '/assets/cover_9.jpeg'),
+('Blueberry Spread', 'Beast Ensemble', 2007, '/assets/cover_10.jpeg');
 
 CREATE TABLE IF NOT EXISTS genres (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -52,7 +53,9 @@ VALUES
 (6,4),
 (7,5),
 (8,1),
-(9,2);
+(9,2),
+(10,1),
+(10,5);
 
 `;
 

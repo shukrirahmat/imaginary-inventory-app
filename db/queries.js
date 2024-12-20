@@ -33,7 +33,7 @@ async function getRecordsInGenre(genreId) {
     INNER JOIN genres
     ON genre_id = genres.id
     WHERE genre_id = ${genreId};
-    `
+    `;
     const {rows} = await pool.query(query);
     console.log(rows)
     return rows;
