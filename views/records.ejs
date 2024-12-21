@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1><%= title%></h1>
-    <p><%= amount%> total records found</p>
+    <p><%= locals.amount%> total records found</p>
     <% locals.records.forEach((record) => { %>
         <div class="album">
             <img src="<%=record.imgurl%>" alt="album cover" width="200" height="200">

@@ -19,6 +19,15 @@
 
   <li><a href="/genre/all">All records</a></li>
 
+  <p></p> 
+
+  <%- include("partials/errors.ejs") %>
+  <form action="/addgenre" method="POST">
+    <label for="newgenre">Add new genre</label>
+    <input type="text" id="newgenre" name="newgenre" required>
+    <button>ADD</button>
+  </form>
+
 </body>
 
 </html>
