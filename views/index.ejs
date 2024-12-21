@@ -9,7 +9,7 @@
 
 <body>
   <h1><%=title%></h1>
-  <p>Pick which genre!</p>
+  <p>Pick which genre to view!</p>
 
   <div class="genrelist">
     <% locals.genres.forEach((genre) => { %>
@@ -19,15 +19,11 @@
 
   <li><a href="/genre/all">All records</a></li>
 
-  <p></p> 
+  <p></p>
 
-  <%- include("partials/errors.ejs") %>
-  <form action="/addgenre" method="POST">
-    <label for="newgenre">Add new genre</label>
-    <input type="text" id="newgenre" name="newgenre" required>
-    <button>ADD</button>
-  </form>
-
+  <a href="/newrecord">Add new record</a>
+  <a href="/genre/settings">Genre settings</a>
+  
 </body>
 
 </html>
