@@ -10,7 +10,7 @@
     <p><%= locals.amount%> total records found</p>
     <% locals.records.forEach((record) => { %>
         <div class="album">
-            <img src="<%=record.imgurl%>" alt="album cover" width="200" height="200">
+            <img src="<%=record.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" />
             <p><b><%=record.record_name%></b></p>
             <p>By: <%=record.artist%></p>
             <p>Year: <%=record.year%></p>

@@ -26,19 +26,17 @@ const getSettingsPage = async (req, res) => {
   res.render("genreSettings", {title: "Genre Settings"});
 }
 
-/////////
-
-const validateUser = [
+const validateGenreName = [
   body("newgenre")
     .trim()
     .isLength({ min: 1, max: 20 })
     .withMessage(
-      `Genre name is too long!\nIt should be less than 20 characters`
+      `Genre name cannot be empty or more than 20 characters`
     ),
 ];
 
 const createNewGenre = [
-  validateUser,
+  validateGenreName,
   async (req, res) => {
     const errors = validationResult(req);
     const genres = await db.getAllGenres();

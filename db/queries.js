@@ -70,11 +70,45 @@ async function addNewGenre(name) {
   await pool.query(query);
 }
 
+async function addNewRecord(record_name, artist, year, imgurl, genreIds) {
+  const insertQuery = `
+  INSERT INTO records (record_name, artist, year, imgurl)
+  VALUES
+  ('${record_name}', '${artist}', ${year}, '${imgurl}');
+  `;
+  await pool.query(insertQuery);
+  const idquery = await pool.query(`SELECT lastval()`);
+  const recordId = idquery.rows[0].lastval;
+  const genreQueryString = genreIds.map((genreId) => {
+    return `(${recordId},${genreId})`
+  }).join(",");
+  const genreInsertQuery = `
+  INSERT INTO records_genres (record_id, genre_id)
+  VALUES
+  ${genreQueryString};
+  `;
+  await pool.query(genreInsertQuery);
+}
+
+async function getGenreNamesFromIds(genreIds) {
+  const idString = genreIds.map((genreId) => {
+    return `${genreId}`
+  }).join(",");
+  const query = `
+  SELECT genre_name from genres
+  WHERE id IN (${idString});
+  `;
+  const {rows} = await pool.query(query);
+  return rows;
+}
+
 module.exports = {
   getAllRecords,
   getAllGenres,
   getRecordsInGenre,
   getGenreName,
   checkIfGenreExists,
-  addNewGenre
+  addNewGenre,
+  addNewRecord,
+  getGenreNamesFromIds
 };
