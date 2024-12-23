@@ -38,26 +38,38 @@ const createNewGenre = [
   validateGenreName,
   async (req, res) => {
     const errors = validationResult(req);
-    const genres = await db.getAllGenres();
     if (!errors.isEmpty()) {
+      const errorText = errors
+        .array()
+        .map((error) => {
+          console.log(error.msg);
+          return `${error.msg}`;
+        })
+        .join("\n");
+      const genres = await db.getAllGenres();
       return res.status(400).render("genreSettings", {
         title: "Genre Settings",
         genres,
-        errors: errors.array(),
+        addStatus: errorText,
       });
     }
-
     const toAdd = req.body.newgenre;
     const genreExist = await db.checkIfGenreExists(toAdd);
     if (genreExist[0].exists) {
+      const genres = await db.getAllGenres();
       return res.status(400).render("genreSettings", {
         title: "Genre Settings",
         genres,
-        errors: [{ msg: "That genre already exists" }],
+        addStatus: "That genre already exists",
       });
     }
     await db.addNewGenre(toAdd);
-    res.render("genreAddSuccess", { justadded: `${toAdd}` });
+    const genres = await db.getAllGenres();
+    res.render("genreSettings", {
+      title: "Genre Settings",
+      genres,
+      addStatus: `Successfully added genre "${toAdd}"`,
+    });
   },
 ];
 
@@ -69,7 +81,7 @@ const deleteGenre = async (req, res) => {
     return res.status(400).render("genreSettings", {
       title: "Genre Settings",
       genres,
-      deleteStatus: `Cannot delete "${req.body.genreName}". There exists ${tiedRecords} records with this genre.\nDelete or edit the records first to make sure the genre is empty`,
+      deleteStatus: `Cannot delete "${req.body.genreName}". There exists ${tiedRecords} records with this genre. \nDelete or edit the records first to make sure the genre is empty`,
     });
   }
   await db.deleteGenre(id);

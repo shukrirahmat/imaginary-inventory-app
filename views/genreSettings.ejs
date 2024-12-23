@@ -8,7 +8,7 @@
 <body>
     <h1>Add new genre</h1>
 
-    <%- include("partials/errors.ejs") %>
+    <p><%= locals.addStatus%></p>
     <form action="/genre/settings" method="POST">
       <label for="newgenre">Add new genre</label>
       <input type="text" id="newgenre" name="newgenre">
