@@ -23,16 +23,15 @@ const getRecordsInGenre = async (req, res) => {
 };
 
 const getSettingsPage = async (req, res) => {
-  res.render("genreSettings", {title: "Genre Settings"});
-}
+  const genres = await db.getAllGenres();
+  res.render("genreSettings", { title: "Genre Settings", genres });
+};
 
 const validateGenreName = [
   body("newgenre")
     .trim()
     .isLength({ min: 1, max: 20 })
-    .withMessage(
-      `Genre name cannot be empty or more than 20 characters`
-    ),
+    .withMessage(`Genre name cannot be empty or more than 20 characters`),
 ];
 
 const createNewGenre = [
@@ -54,17 +53,38 @@ const createNewGenre = [
       return res.status(400).render("genreSettings", {
         title: "Genre Settings",
         genres,
-        errors: [{msg:"That genre already exists"}]
+        errors: [{ msg: "That genre already exists" }],
       });
     }
     await db.addNewGenre(toAdd);
-    res.render("genreAddSuccess", {justadded: `${toAdd}`})
+    res.render("genreAddSuccess", { justadded: `${toAdd}` });
   },
 ];
+
+const deleteGenre = async (req, res) => {
+  const id = req.body.genreId;
+  const tiedRecords = await db.checkIfThereIsRecordWithGenre(id);
+  if (tiedRecords > 0) {
+    const genres = await db.getAllGenres();
+    return res.status(400).render("genreSettings", {
+      title: "Genre Settings",
+      genres,
+      deleteStatus: `Cannot delete "${req.body.genreName}". There exists ${tiedRecords} records with this genre.\nDelete or edit the records first to make sure the genre is empty`,
+    });
+  }
+  await db.deleteGenre(id);
+  const genres = await db.getAllGenres();
+  res.render("genreSettings", {
+    title: "Genre Settings",
+    genres,
+    deleteStatus: `Successfully deleted "${req.body.genreName}".`,
+  });
+};
 
 module.exports = {
   getAllRecords,
   getRecordsInGenre,
   getSettingsPage,
-  createNewGenre
+  createNewGenre,
+  deleteGenre,
 };

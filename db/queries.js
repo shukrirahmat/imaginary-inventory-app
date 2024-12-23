@@ -102,6 +102,25 @@ async function getGenreNamesFromIds(genreIds) {
   return rows;
 }
 
+async function checkIfThereIsRecordWithGenre(id) {
+  const query = 
+  `
+  SELECT * FROM records_genres
+  WHERE genre_id = ${id};
+  `;
+  const {rowCount} = await pool.query(query);
+  return rowCount;
+}
+
+async function deleteGenre(id) {
+  const query = 
+  `
+  DELETE FROM genres
+  WHERE id = ${id};
+  `;
+  await pool.query(query);
+}
+
 module.exports = {
   getAllRecords,
   getAllGenres,
@@ -110,5 +129,7 @@ module.exports = {
   checkIfGenreExists,
   addNewGenre,
   addNewRecord,
-  getGenreNamesFromIds
+  getGenreNamesFromIds,
+  checkIfThereIsRecordWithGenre,
+  deleteGenre
 };

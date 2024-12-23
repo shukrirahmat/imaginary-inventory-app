@@ -15,6 +15,21 @@
       <button>ADD</button>
     </form>
 
+    <h2>List of existing genres</h2>
+    <p><%= locals.deleteStatus%></p>
+    <% locals.genres.forEach((genre) => { %>
+      <div>
+        <p><%= genre.genre_name%></p>
+        <button>RENAME</button>
+        <form action="/genre/settings/delete" method="POST">
+          <input type="hidden" value="<%= genre.id%>" name="genreId">
+          <input type="hidden" value="<%= genre.genre_name%>" name="genreName">
+          <button>DELETE</button>
+        </form>
+      </div>
+      <hr>
+    <% }) %>
+
     <p></p>
     <a href="/">Return to Home</a>
 
