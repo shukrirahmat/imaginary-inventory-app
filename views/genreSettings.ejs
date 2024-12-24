@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title%></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title><%= title%></title>
 </head>
+
 <body>
-    <h1>Add new genre</h1>
+  <h1>Add new genre</h1>
 
-    <p><%= locals.addStatus%></p>
-    <form action="/genre/settings" method="POST">
-      <label for="newgenre">Add new genre</label>
-      <input type="text" id="newgenre" name="newgenre">
-      <button>ADD</button>
+  <p><%= locals.addStatus%></p>
+  <form action="/genre/settings" method="POST">
+    <label for="newgenre">Add new genre</label>
+    <input type="text" id="newgenre" name="newgenre">
+    <button>ADD</button>
+  </form>
+
+  <h2>List of existing genres</h2>
+  <p><%= locals.rdStatus%></p>
+  <% locals.genres.forEach((genre) => { %>
+  <div class="genreDivs">
+    <p><%= genre.genre_name%></p>
+    <form class="renameForm" action="/genre/settings/rename" method="POST">
+      <input type="hidden" value="<%= genre.id%>" name="genreId">
+      <input type="hidden" value="<%= genre.genre_name%>" name="oldgenre">
+      <input type="text" value="<%= genre.genre_name%>" name="newgenre">
+      <button>OK</button>
     </form>
+    <button class="renameButton">RENAME</button>
+    <form action="/genre/settings/delete" method="POST">
+      <input type="hidden" value="<%= genre.id%>" name="genreId">
+      <input type="hidden" value="<%= genre.genre_name%>" name="genreName">
+      <button>DELETE</button>
+    </form>
+  </div>
+  <hr>
+  <% }) %>
 
-    <h2>List of existing genres</h2>
-    <p><%= locals.deleteStatus%></p>
-    <% locals.genres.forEach((genre) => { %>
-      <div>
-        <p><%= genre.genre_name%></p>
-        <button>RENAME</button>
-        <form action="/genre/settings/delete" method="POST">
-          <input type="hidden" value="<%= genre.id%>" name="genreId">
-          <input type="hidden" value="<%= genre.genre_name%>" name="genreName">
-          <button>DELETE</button>
-        </form>
-      </div>
-      <hr>
-    <% }) %>
-
-    <p></p>
-    <a href="/">Return to Home</a>
-
+  <p></p>
+  <a href="/">Return to Home</a>
+  <script>
+    const genreDivs = document.querySelectorAll(".genreDivs");
+    genreDivs.forEach((div, index) => {
+      const form = div.querySelector(".renameForm");
+      const btn = div.querySelector(".renameButton");
+      btn.addEventListener("click", (e) => {
+        form.classList.toggle("show");
+        if (btn.textContent == "RENAME") {
+          btn.textContent = "CANCEL"
+        } else { btn.textContent = "RENAME"}
+      })
+    })
+  </script>
 </body>
+
 </html>

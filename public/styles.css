@@ -1,0 +1,7 @@
+.renameForm {
+    display: none;
+}
+
+.renameForm.show {
+    display: block;
+}

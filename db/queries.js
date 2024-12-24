@@ -37,7 +37,7 @@ async function getRecordsInGenre(genreId) {
 }
 
 async function getAllGenres() {
-  const { rows } = await pool.query("SELECT * FROM genres");
+  const { rows } = await pool.query("SELECT * FROM genres ORDER BY genre_name");
   return rows;
 }
 
@@ -55,6 +55,17 @@ async function checkIfGenreExists(name) {
         SELECT EXISTS (
             SELECT genre_name FROM genres
             WHERE LOWER(genre_name) = LOWER('${name}')
+        )
+    `;
+  const { rows } = await pool.query(query);
+  return rows;
+}
+
+async function checkIfGenreExistExcludingID(name, id) {
+  const query = `
+        SELECT EXISTS (
+            SELECT genre_name FROM genres
+            WHERE id = ${id} AND LOWER(genre_name) = LOWER('${name}')
         )
     `;
   const { rows } = await pool.query(query);
@@ -121,15 +132,27 @@ async function deleteGenre(id) {
   await pool.query(query);
 }
 
+async function renameGenre(name, id) {
+  const query = 
+  `
+  UPDATE genres
+  SET genre_name = '${name}'
+  WHERE id = ${id};
+  `;
+  await pool.query(query);
+}
+
 module.exports = {
   getAllRecords,
   getAllGenres,
   getRecordsInGenre,
   getGenreName,
   checkIfGenreExists,
+  checkIfGenreExistExcludingID,
   addNewGenre,
   addNewRecord,
   getGenreNamesFromIds,
   checkIfThereIsRecordWithGenre,
-  deleteGenre
+  deleteGenre,
+  renameGenre
 };
