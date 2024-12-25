@@ -13,16 +13,16 @@
 
   <div class="genrelist">
     <% locals.genres.forEach((genre) => { %>
-    <li><a href="/genre/<%=genre.id%>"><%=genre.genre_name%></a></li>
+    <li><a href="/record/<%=genre.id%>"><%=genre.genre_name%></a></li>
     <% }) %>
   </div>
 
-  <li><a href="/genre/all">All records</a></li>
+  <li><a href="/record/all">All records</a></li>
 
   <p></p>
 
-  <a href="/newrecord">Add new record</a>
-  <a href="/genre/settings">Genre settings</a>
+  <a href="/record/new">Add new record</a>
+  <a href="/genre">Genre settings</a>
   
 </body>
 

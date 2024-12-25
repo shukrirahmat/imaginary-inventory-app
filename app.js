@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const indexRouter = require("./routes/indexRouter");
 const genreRouter = require("./routes/genreRouter");
-const newRecordRouter = require("./routes/newRecordRouter")
+const recordRouter = require("./routes/recordRouter")
 const path = require("node:path");
 
 app.set("views", path.join(__dirname, "views"));
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
 app.use("/genre", genreRouter);
-app.use("/newrecord", newRecordRouter);
+app.use("/record", recordRouter);
 
 const PORT = process.env.PORT;
 

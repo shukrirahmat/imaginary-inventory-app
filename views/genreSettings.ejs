@@ -12,7 +12,7 @@
   <h1>Add new genre</h1>
 
   <p><%= locals.addStatus%></p>
-  <form action="/genre/settings" method="POST">
+  <form action="/genre/new" method="POST">
     <label for="newgenre">Add new genre</label>
     <input type="text" id="newgenre" name="newgenre">
     <button>ADD</button>
@@ -23,14 +23,14 @@
   <% locals.genres.forEach((genre) => { %>
   <div class="genreDivs">
     <p><%= genre.genre_name%></p>
-    <form class="renameForm" action="/genre/settings/rename" method="POST">
+    <form class="renameForm" action="/genre/rename" method="POST">
       <input type="hidden" value="<%= genre.id%>" name="genreId">
       <input type="hidden" value="<%= genre.genre_name%>" name="oldgenre">
       <input type="text" value="<%= genre.genre_name%>" name="newgenre">
       <button>OK</button>
     </form>
     <button class="renameButton">RENAME</button>
-    <form action="/genre/settings/delete" method="POST">
+    <form action="/genre/delete" method="POST">
       <input type="hidden" value="<%= genre.id%>" name="genreId">
       <input type="hidden" value="<%= genre.genre_name%>" name="genreName">
       <button>DELETE</button>
