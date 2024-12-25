@@ -49,14 +49,14 @@ const createNewRecord = [
   async (req, res) => {
     const errArray = validationResult(req).array();
     if (!req.body.genres) {
-      errArray.push({msg: "Must check at least one genre"});
+      errArray.push({ msg: "Must check at least one genre" });
     }
     if (errArray.length > 0) {
       const genres = await db.getAllGenres();
       return res.status(400).render("newRecord", {
         title: "Add new record",
         genres,
-        errors: errArray
+        errors: errArray,
       });
     }
     await db.addNewRecord(
@@ -66,17 +66,97 @@ const createNewRecord = [
       req.body.imgurl,
       [].concat(req.body.genres)
     );
-    const genreNames = await db.getGenreNamesFromIds([].concat(req.body.genres));
-    const genreNamesStr = genreNames.map((genre) => {
-      return `${genre.genre_name}`
-    }).join(",");
+    const genreNames = await db.getGenreNamesFromIds(
+      [].concat(req.body.genres)
+    );
+    const genreNamesStr = genreNames
+      .map((genre) => {
+        return `${genre.genre_name}`;
+      })
+      .join(", ");
     res.render("recordCreateSuccess", {
       record_name: req.body.record_name,
       artist: req.body.artist,
       year: req.body.year,
       imgurl: req.body.imgurl,
-      genres: genreNamesStr
-    })
+      genres: genreNamesStr,
+    });
+  },
+];
+
+const deleteRecord = async (req, res) => {
+  const deleteId = req.body.deleteId;
+  await db.deleteRecord(deleteId);
+  res.redirect(req.get("Referrer") || "/");
+};
+
+const getEditPage = async (req, res) => {
+  const defData = req.body;
+  let defGenres = await db.getGenreListFromRecord(defData.id);
+  defGenres = defGenres.map((genre) => {
+    return genre.genre_id;
+  });
+  const genres = await db.getAllGenres();
+  res.render("editRecord", {
+    title: "Editing",
+    genres,
+    defId: defData.id,
+    defName: defData.record_name,
+    defArtist: defData.artist,
+    defYear: defData.year,
+    defImgurl: defData.imgurl,
+    defGenres,
+  });
+};
+
+const editRecord = [
+  validateRecord,
+  async (req, res) => {
+    let defGenres = [].concat(req.body.defGenres);
+    defGenres = defGenres.map((dg) => {
+      return parseInt(dg);
+    });
+    const errArray = validationResult(req).array();
+    if (!req.body.genres) {
+      errArray.push({ msg: "Must check at least one genre" });
+    }
+    if (errArray.length > 0) {
+      const genres = await db.getAllGenres();
+      return res.status(400).render("editRecord", {
+        title: "Editing",
+        genres,
+        errors: errArray,
+        defId: req.body.defId,
+        defName: req.body.defName,
+        defArtist: req.body.defArtist,
+        defYear: req.body.defYear,
+        defImgurl: req.body.defImgurl,
+        defGenres,
+      });
+    }
+    await db.editRecord(
+      req.body.defId,
+      req.body.record_name,
+      req.body.artist,
+      parseInt(req.body.year),
+      req.body.imgurl,
+      [].concat(req.body.genres)
+    );
+    const genreNames = await db.getGenreNamesFromIds(
+      [].concat(req.body.genres)
+    );
+    const genreNamesStr = genreNames
+      .map((genre) => {
+        return `${genre.genre_name}`;
+      })
+      .join(", ");
+    res.render("editSuccess", {
+      record_name: req.body.record_name,
+      artist: req.body.artist,
+      year: req.body.year,
+      imgurl: req.body.imgurl,
+      genres: genreNamesStr,
+    });
   },
 ];
 
@@ -85,4 +165,7 @@ module.exports = {
   getRecordsInGenre,
   getNewRecordPage,
   createNewRecord,
+  deleteRecord,
+  getEditPage,
+  editRecord,
 };

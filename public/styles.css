@@ -1,7 +1,19 @@
-.renameForm {
+.genreRenameForm {
     display: none;
 }
 
-.renameForm.show {
+.genreRenameForm.show {
     display: block;
+}
+
+.recordDeleteForm {
+    display: none;
+}
+
+.recordDeleteForm.show {
+    display: block;
+}
+
+.recordDeleteButton.hide {
+    display: none;
 }

@@ -4,21 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title%></title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1><%= title%></h1>
     <p><%= locals.amount%> total records found</p>
     <% locals.records.forEach((record) => { %>
-        <div class="album">
+        <div class="recordDivs">
             <img src="<%=record.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" />
             <p><b><%=record.record_name%></b></p>
             <p>By: <%=record.artist%></p>
             <p>Year: <%=record.year%></p>
             <p>Genre: <%=record.genre_str%></p>
+            <form action="/record/editForm" method="POST">
+                <input type="hidden" value="<%=record.id%>" name="id">
+                <input type="hidden" value="<%=record.record_name%>" name="record_name">
+                <input type="hidden" value="<%=record.artist%>" name="artist">
+                <input type="hidden" value="<%=record.year%>" name="year">
+                <input type="hidden" value="<%=record.imgurl%>" name="imgurl">
+                <button>EDIT</button>
+            </form>
+            <form action="/record/delete" method="POST" class="recordDeleteForm">
+                <input type="hidden" value="<%=record.id%>" name="deleteId">
+                <p>Are you sure?</p>
+                <button type="submit">YES</button>
+                <button type="button" class="cancelDeleteButton">NO</button>
+            </form>
+            <button class="recordDeleteButton">DELETE</button>
         </div>
     <% }) %>
 
     <a href="/">Return to Home</a>
+    <script>
+        const recordDivs = document.querySelectorAll(".recordDivs");
+        recordDivs.forEach((div, index) => {
+            const delForm = div.querySelector(".recordDeleteForm");
+            const delBtn = div.querySelector(".recordDeleteButton");
+            const cancelBtn = div.querySelector(".cancelDeleteButton");
+            delBtn.addEventListener("click", (e) => {
+                delForm.classList.toggle("show");
+                delBtn.classList.toggle("hide");
+            });
+            cancelBtn.addEventListener("click", (e) => {
+                delForm.classList.toggle("show");
+                delBtn.classList.toggle("hide");
+            })
+        })
+
+    </script>
     
 </body>
 </html>

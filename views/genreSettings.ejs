@@ -23,7 +23,7 @@
   <% locals.genres.forEach((genre) => { %>
   <div class="genreDivs">
     <p><%= genre.genre_name%></p>
-    <form class="renameForm" action="/genre/rename" method="POST">
+    <form class="genreRenameForm" action="/genre/rename" method="POST">
       <input type="hidden" value="<%= genre.id%>" name="genreId">
       <input type="hidden" value="<%= genre.genre_name%>" name="oldgenre">
       <input type="text" value="<%= genre.genre_name%>" name="newgenre">
@@ -44,7 +44,7 @@
   <script>
     const genreDivs = document.querySelectorAll(".genreDivs");
     genreDivs.forEach((div, index) => {
-      const form = div.querySelector(".renameForm");
+      const form = div.querySelector(".genreRenameForm");
       const btn = div.querySelector(".renameButton");
       btn.addEventListener("click", (e) => {
         form.classList.toggle("show");
