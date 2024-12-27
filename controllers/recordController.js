@@ -1,31 +1,43 @@
 const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
+const asyncHandler = require("express-async-handler");
+const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
-const getAllRecords = async (req, res) => {
+const getAllRecords = asyncHandler(async (req, res) => {
   const result = await db.getAllRecords();
   res.render("records", {
     title: "All Records",
     records: result.rows,
     amount: result.rowCount,
   });
-};
+});
 
-const getRecordsInGenre = async (req, res) => {
+const getRecordsInGenre = asyncHandler(async (req, res) => {
   const genreId = req.params.genreId;
+
+  if (isNaN(genreId)) {
+    throw new CustomNotFoundError("Genre not found");
+  }
+
   const result = await db.getRecordsInGenre(genreId);
   const genreNameRes = await db.getGenreName(genreId);
+
+  if (result.length < 1 || genreNameRes.length < 1) {
+    throw new CustomNotFoundError("Genre not found");
+  }
+
   const genreName = genreNameRes[0].genre_name;
   res.render("records", {
     title: ` ${genreName} Records`,
     records: result.rows,
     amount: result.rowCount,
   });
-};
+});
 
-const getNewRecordPage = async (req, res) => {
+const getNewRecordPage = asyncHandler(async (req, res) => {
   const genres = await db.getAllGenres();
   res.render("newRecord", { title: "Add new record", genres });
-};
+});
 
 const validateRecord = [
   body("record_name")
@@ -46,7 +58,7 @@ const validateRecord = [
 
 const createNewRecord = [
   validateRecord,
-  async (req, res) => {
+  asyncHandler(async (req, res) => {
     const errArray = validationResult(req).array();
     if (!req.body.genres) {
       errArray.push({ msg: "Must check at least one genre" });
@@ -81,16 +93,16 @@ const createNewRecord = [
       imgurl: req.body.imgurl,
       genres: genreNamesStr,
     });
-  },
+  }),
 ];
 
-const deleteRecord = async (req, res) => {
+const deleteRecord = asyncHandler(async (req, res) => {
   const deleteId = req.body.deleteId;
   await db.deleteRecord(deleteId);
   res.redirect(req.get("Referrer") || "/");
-};
+});
 
-const getEditPage = async (req, res) => {
+const getEditPage = asyncHandler(async (req, res) => {
   const defData = req.body;
   let defGenres = await db.getGenreListFromRecord(defData.id);
   defGenres = defGenres.map((genre) => {
@@ -107,11 +119,11 @@ const getEditPage = async (req, res) => {
     defImgurl: defData.imgurl,
     defGenres,
   });
-};
+});
 
 const editRecord = [
   validateRecord,
-  async (req, res) => {
+  asyncHandler(async (req, res) => {
     let defGenres = [].concat(req.body.defGenres);
     defGenres = defGenres.map((dg) => {
       return parseInt(dg);
@@ -157,7 +169,7 @@ const editRecord = [
       imgurl: req.body.imgurl,
       genres: genreNamesStr,
     });
-  },
+  }),
 ];
 
 module.exports = {

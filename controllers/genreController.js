@@ -1,10 +1,11 @@
 const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
+const asyncHandler = require("express-async-handler");
 
-const getSettingsPage = async (req, res) => {
+const getSettingsPage = asyncHandler(async (req, res) => {
   const genres = await db.getAllGenres();
   res.render("genreSettings", { title: "Genre Settings", genres });
-};
+});
 
 const validateGenreName = [
   body("newgenre")
@@ -15,7 +16,7 @@ const validateGenreName = [
 
 const createNewGenre = [
   validateGenreName,
-  async (req, res) => {
+  asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const errorText = errors
@@ -48,10 +49,10 @@ const createNewGenre = [
       genres,
       addStatus: `Successfully added genre "${toAdd}"`,
     });
-  },
+  }),
 ];
 
-const deleteGenre = async (req, res) => {
+const deleteGenre = asyncHandler(async (req, res) => {
   const id = req.body.genreId;
   const tiedRecords = await db.checkIfThereIsRecordWithGenre(id);
   if (tiedRecords > 0) {
@@ -69,11 +70,11 @@ const deleteGenre = async (req, res) => {
     genres,
     rdStatus: `Successfully deleted "${req.body.genreName}".`,
   });
-};
+});
 
 const renameGenre = [
   validateGenreName,
-  async (req, res) => {
+  asyncHandler(async (req, res) => {
     const msgList = [];
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -110,7 +111,7 @@ const renameGenre = [
       genres,
       rdStatus: `Renamed ${oldName} to ${newName}`,
     });
-  },
+  }),
 ];
 
 module.exports = {
