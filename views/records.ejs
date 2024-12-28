@@ -19,7 +19,7 @@
     <div class="recordsContainer">
       <% locals.records.forEach((record) => { %>
       <div class="recordDivs">
-        <img src="<%=record.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" />
+        <a href="/record/view/?id=<%=record.id%>&record_name=<%=record.record_name%>&artist=<%=record.artist%>&year=<%=record.year%>&imgurl=<%=record.imgurl%>&genre_str=<%=record.genre_str%>"><img src="<%=record.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" /></a>
         <div class="recordDetails">
           <p><b><%=record.record_name%></b></p>
           <p>By: <%=record.artist%></p>

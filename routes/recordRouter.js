@@ -8,6 +8,7 @@ router.post("/delete", recordController.deleteRecord);
 router.post("/edit", recordController.editRecord);
 router.post("/editForm", recordController.getEditPage);
 router.get("/all", recordController.getAllRecords);
+router.get("/view", recordController.viewRecord);
 router.get("/:genreId", recordController.getRecordsInGenre);
 
 module.exports = router;

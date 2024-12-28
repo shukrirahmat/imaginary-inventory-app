@@ -172,6 +172,12 @@ const editRecord = [
   }),
 ];
 
+const viewRecord = asyncHandler(async(req, res) => {
+  const record = req.query
+  //const recordquery = await db.getRecordFromId(recordId);
+  res.render("viewRecord", {title: record.record_name, record})
+})
+
 module.exports = {
   getAllRecords,
   getRecordsInGenre,
@@ -180,4 +186,5 @@ module.exports = {
   deleteRecord,
   getEditPage,
   editRecord,
+  viewRecord
 };

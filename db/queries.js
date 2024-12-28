@@ -198,6 +198,15 @@ async function editRecord(id, record_name, artist, year, imgurl, genreIds) {
 
 }
 
+async function getRecordFromId(id) {
+  const query = `
+  SELECT * FROM records
+  WHERE id = ${id};
+  `;
+  const {rows} = await pool.query(query);
+  return rows;
+}
+
 module.exports = {
   getAllRecords,
   getAllGenres,
@@ -213,5 +222,6 @@ module.exports = {
   deleteGenre,
   renameGenre,
   deleteRecord,
-  editRecord
+  editRecord,
+  getRecordFromId
 };

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title><%=title %></title>
+</head>
+
+<body>
+  <%- include("partials/header.ejs") %>
+  <div class="recordDivs">
+    <img src="<%=record.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" />
+    <div class="recordDetails">
+      <p><b><%=record.record_name%></b></p>
+      <p>By: <%=record.artist%></p>
+      <p>Year: <%=record.year%></p>
+      <p>Genre: <%=record.genre_str%></p>
+      <div class="buttonContainer">
+        <form action="/record/editForm" class="recordEditForm" method="POST">
+          <input type="hidden" value="<%=record.id%>" name="id">
+          <input type="hidden" value="<%=record.record_name%>" name="record_name">
+          <input type="hidden" value="<%=record.artist%>" name="artist">
+          <input type="hidden" value="<%=record.year%>" name="year">
+          <input type="hidden" value="<%=record.imgurl%>" name="imgurl">
+          <button class="recordEditButton">EDIT</button>
+        </form>
+        <form action="/record/delete" method="POST" class="recordDeleteForm">
+          <input type="hidden" value="<%=record.id%>" name="deleteId">
+          <p>Are you sure?</p>
+          <button type="submit" class="confirmDeleteButton">YES</button>
+          <button type="button" class="cancelDeleteButton">NO</button>
+        </form>
+        <button class="recordDeleteButton">DELETE</button>
+      </div>
+    </div>
+</body>
+
+</html>
