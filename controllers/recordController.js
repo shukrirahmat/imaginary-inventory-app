@@ -174,7 +174,6 @@ const editRecord = [
 
 const viewRecord = asyncHandler(async(req, res) => {
   const record = req.query
-  //const recordquery = await db.getRecordFromId(recordId);
   res.render("viewRecord", {title: record.record_name, record})
 })
 
