@@ -8,6 +8,14 @@
     src: url(fonts/Lalezar-Regular.ttf);
 }
 
+@font-face {
+    font-family: "PT Sans";
+    src: url(fonts/PTSans-Regular.ttf),
+    url(fonts/PTSans-Italic.ttf),
+    url(fonts/PTSans-Bold.ttf),
+    url(fonts/PTSans-BoldItalic.ttf);
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -16,6 +24,7 @@
 body {
     padding: 0;
     margin: 0;
+    font-family: "PT Sans", sans-serif;
 }
 
 .header {
@@ -30,7 +39,7 @@ body {
 
 .headerContainer h3 {
     font-size: 20px;
-    font-family: "Lazelar";
+    font-family: "Lazelar", sans-serif;
     color: white;
     font-weight: normal;
     margin-bottom: -20px;
@@ -39,10 +48,115 @@ body {
 
 .headerContainer h1 {
     font-size: 60px;
-    font-family: "Monoton";
+    font-family: "Monoton", sans-serif;
     color: white;
     font-weight: normal;
 }
+
+.headerContainer a {
+    text-decoration: none;
+    color: white;
+}
+
+.mainContent {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recordsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 50px;
+}
+
+.recordDivs {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 200px;
+}
+
+.recordDetails {
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.recordDetails .buttonContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-self: stretch;
+    min-height: 25px;
+} 
+
+.recordDivs img {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.recordEditForm {
+    flex: 1;
+    background-color: grey;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+}
+
+.recordEditButton, .confirmDeleteButton {
+    border:none;
+    background-color: green;
+    text-decoration: none;
+    flex: 1;
+    font-family: "PT Sans", sans-serif;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.recordEditButton:hover, .confirmDeleteButton:hover{
+    background-color: rgb(0, 108, 0);
+}
+
+.recordDeleteButton, .cancelDeleteButton  {
+    border:none;
+    text-decoration: none;
+    flex: 1;
+    background-color: crimson;
+    font-family: "PT Sans", sans-serif;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.recordDeleteButton:hover, .cancelDeleteButton:hover {
+    background-color: rgb(200, 0, 40);
+}
+
+.cancelDeleteButton, .confirmDeleteButton {
+    padding: 5px 10px;
+}
+
+.recordDeleteForm {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.returnLink {
+    align-self: center;
+    color: black;
+}
+
+
+/* THIS PART IS FOR HIDE/SHOW THROUGH CLICKS */
 
 .genreRenameForm {
     display: none;
@@ -57,9 +171,13 @@ body {
 }
 
 .recordDeleteForm.show {
-    display: block;
+    display: flex;
 }
 
 .recordDeleteButton.hide {
+    display: none;
+}
+
+.recordEditForm.hide {
     display: none;
 }
