@@ -1,190 +1,312 @@
 @font-face {
-    font-family: "Monoton";
-    src: url(fonts/Monoton-Regular.ttf);
+  font-family: "Monoton";
+  src: url(fonts/Monoton-Regular.ttf);
 }
 
 @font-face {
-    font-family: "Lazelar";
-    src: url(fonts/Lalezar-Regular.ttf);
+  font-family: "Lazelar";
+  src: url(fonts/Lalezar-Regular.ttf);
 }
 
 @font-face {
-    font-family: "PT Sans";
-    src: url(fonts/PTSans-Regular.ttf),
-    url(fonts/PTSans-Italic.ttf),
-    url(fonts/PTSans-Bold.ttf),
-    url(fonts/PTSans-BoldItalic.ttf);
+  font-family: "PT Sans";
+  src: url(fonts/PTSans-Regular.ttf), url(fonts/PTSans-Italic.ttf),
+    url(fonts/PTSans-Bold.ttf), url(fonts/PTSans-BoldItalic.ttf);
 }
 
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    padding: 0;
-    margin: 0;
-    font-family: "PT Sans", sans-serif;
+  padding: 0;
+  margin: 0;
+  font-family: "PT Sans", sans-serif;
 }
 
 .header {
-    background-color: rgb(15, 15, 15);
-    min-height: 100px;
+  background-color: rgb(15, 15, 15);
+  min-height: 100px;
 }
 
 .headerContainer {
-    padding: 10px;
-    margin: 0 auto;
+  padding: 10px;
+  margin: 0 auto;
 }
 
 .headerContainer h3 {
-    font-size: 20px;
-    font-family: "Lazelar", sans-serif;
-    color: white;
-    font-weight: normal;
-    margin-bottom: -20px;
-    letter-spacing: 5px;
+  font-size: 20px;
+  font-family: "Lazelar", sans-serif;
+  color: white;
+  font-weight: normal;
+  margin-bottom: -20px;
+  letter-spacing: 5px;
 }
 
 .headerContainer h1 {
-    font-size: 60px;
-    font-family: "Monoton", sans-serif;
-    color: white;
-    font-weight: normal;
+  font-size: 60px;
+  font-family: "Monoton", sans-serif;
+  color: white;
+  font-weight: normal;
 }
 
 .headerContainer a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 
 .mainContent {
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mainContent.indexPage {
+  flex-direction: row;
+  gap: 50px;
+}
+
+.mainContent.indexPage .leftIndex {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.mainContent.indexPage .rightIndex {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.mainContent.indexPage .leftIndex a {
+  color: dodgerblue;
+  font-size: 20px;
+}
+
+.mainContent.indexPage .rightIndex a {
+  color: dodgerblue;
+  font-size: 35px;
+  text-decoration: none;
+}
+
+.mainContent.indexPage .rightIndex .goto {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 }
 
 .recordsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 50px;
 }
 
 .recordDivs {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 200px;
 }
 
 .recordDetails {
-    font-size: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .recordDetails p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-
 .recordDetails .buttonContainer {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-self: stretch;
-    min-height: 25px;
-} 
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-self: stretch;
+  min-height: 25px;
+}
 
-.recordDivs img {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.mainContent img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .recordEditForm {
-    flex: 1;
-    background-color: grey;
-    display: flex;
-    flex-direction: row;
-    border-radius: 5px;
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
 }
 
-.recordEditButton, .confirmDeleteButton {
-    border:none;
-    background-color: green;
-    text-decoration: none;
-    flex: 1;
-    font-family: "PT Sans", sans-serif;
-    color: white;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 5px;
-    border-radius: 5px;
+.recordEditButton,
+.confirmDeleteButton {
+  border: none;
+  background-color: green;
+  text-decoration: none;
+  flex: 1;
+  font-family: "PT Sans", sans-serif;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
-.recordEditButton:hover, .confirmDeleteButton:hover{
-    background-color: rgb(0, 108, 0);
+.recordEditButton:hover,
+.confirmDeleteButton:hover {
+  background-color: rgb(0, 108, 0);
 }
 
-.recordDeleteButton, .cancelDeleteButton  {
-    border:none;
-    text-decoration: none;
-    flex: 1;
-    background-color: crimson;
-    font-family: "PT Sans", sans-serif;
-    color: white;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 5px;
-    border-radius: 5px;
+.recordDeleteButton,
+.cancelDeleteButton {
+  border: none;
+  text-decoration: none;
+  flex: 1;
+  background-color: crimson;
+  font-family: "PT Sans", sans-serif;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
-.recordDeleteButton:hover, .cancelDeleteButton:hover {
-    background-color: rgb(200, 0, 40);
+.recordDeleteButton:hover,
+.cancelDeleteButton:hover {
+  background-color: rgb(200, 0, 40);
 }
 
-.cancelDeleteButton, .confirmDeleteButton {
-    padding: 5px 10px;
+.cancelDeleteButton,
+.confirmDeleteButton {
+  padding: 5px 10px;
 }
 
 .recordDeleteForm {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
 }
 
 .returnLink {
-    align-self: center;
-    color: black;
+  align-self: center;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 40px 0;
 }
+
+.returnLink a {
+  color: black;
+}
+
+.recordForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 100%;
+  max-width: 600px;
+  align-self: center;
+}
+
+.recordForm > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.recordForm input {
+  padding: 5px;
+  font-size: 18px;
+}
+
+.recordForm button {
+  align-self: center;
+  border: none;
+  background-color: rgb(15, 15, 15);
+  text-decoration: none;
+  font-family: "PT Sans", sans-serif;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.recordForm button:hover {
+  background-color: black;
+}
+
+.recordForm .genreCheckboxes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.errorList {
+  padding: 0 20px;
+}
+
+.successPage .recordDivs {
+    max-width: none;
+    flex-direction: row;
+}
+
+.successPage .recordDetails {
+    align-self: center;
+    font-size: 20px;
+}
+
 
 
 /* THIS PART IS FOR HIDE/SHOW THROUGH CLICKS */
 
 .genreRenameForm {
-    display: none;
+  display: none;
 }
 
 .genreRenameForm.show {
-    display: block;
+  display: block;
 }
 
 .recordDeleteForm {
-    display: none;
+  display: none;
 }
 
 .recordDeleteForm.show {
-    display: flex;
+  display: flex;
 }
 
 .recordDeleteButton.hide {
-    display: none;
+  display: none;
 }
 
 .recordEditForm.hide {
-    display: none;
+  display: none;
+}
+
+/* MEDIA SETTINGS */
+
+@media (max-width: 700px) {
+  .mainContent.indexPage {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .mainContent.indexPage .leftIndex {
+    border-right: none;
+  }
 }

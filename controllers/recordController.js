@@ -86,15 +86,27 @@ const createNewRecord = [
         return `${genre.genre_name}`;
       })
       .join(", ");
-    res.render("recordCreateSuccess", {
+    const params = new URLSearchParams({
       record_name: req.body.record_name,
       artist: req.body.artist,
       year: req.body.year,
       imgurl: req.body.imgurl,
       genres: genreNamesStr,
-    });
+    })
+    res.redirect(`/record/createSuccess/?${params.toString()}`);
   }),
 ];
+
+const showCreateSuccessPage = asyncHandler (async (req, res) => {
+  const {record_name, artist, year, imgurl, genres} = req.query;
+  res.render("recordCreateSuccess", {
+    record_name,
+    artist,
+    year,
+    imgurl,
+    genres,
+  });
+});
 
 const deleteRecord = asyncHandler(async (req, res) => {
   const deleteId = req.body.deleteId;
@@ -185,5 +197,6 @@ module.exports = {
   deleteRecord,
   getEditPage,
   editRecord,
-  viewRecord
+  viewRecord,
+  showCreateSuccessPage
 };

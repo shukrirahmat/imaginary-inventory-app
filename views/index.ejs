@@ -10,22 +10,31 @@
 
 <body>
   <%- include("partials/header.ejs") %>
-  <h1><%=title%></h1>
-  <p>Pick which genre to view!</p>
+  <div class="mainContent indexPage">
+    <div class="leftIndex">
+      <h1>Choose a genre to view</h1>
 
-  <div class="genrelist">
-    <% locals.genres.forEach((genre) => { %>
-    <li><a href="/record/<%=genre.id%>"><%=genre.genre_name%></a></li>
-    <% }) %>
+      <div class="genreList">
+        <% locals.genres.forEach((genre) => { %>
+        <li><a href="/record/<%=genre.id%>"><%=genre.genre_name%></a></li>
+        <% }) %>
+      </div>
+
+      <li><a href="/record/all">All records</a></li>
+    </div>
+
+    <div class="rightIndex">
+      <div class="goto">
+        <h1>Add new record</h1>
+        <a href="/record/new">&gt;</a>
+      </div>
+      <div class="goto">
+        <h1>Manage genres</h1>
+        <a href="/genre">&gt;</a>
+      </div>
+    </div>
   </div>
 
-  <li><a href="/record/all">All records</a></li>
-
-  <p></p>
-
-  <a href="/record/new">Add new record</a>
-  <a href="/genre">Genre settings</a>
-  
 </body>
 
 </html>

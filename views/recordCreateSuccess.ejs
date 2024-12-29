@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles.css">
-    <title>Success</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+  <title>Success</title>
 </head>
+
 <body>
-    <%- include("partials/header.ejs") %>
+  <%- include("partials/header.ejs") %>
+  <div class="mainContent successPage">
     <h1>Successfully Added</h1>
-    <div class="album">
-        <img src="<%=locals.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" />
+    <div class="recordDivs">
+      <img src="<%=locals.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" />
+      <div class="recordDetails">
         <p><b><%=locals.record_name%></b></p>
         <p>By: <%=locals.artist%></p>
         <p>Year: <%=locals.year%></p>
         <p>Genre: <%=locals.genres%></p>
+      </div>
     </div>
 
-    <p></p>
-    <a href="/">Return Home</a>
-    <a href="/record/new">Add another</a>
+    <div class="returnLink">
+      <a href="/">Return Home</a>
+      <a href="/record/new">Add another</a>
+    </div>
+  </div>
 </body>
+
 </html>
