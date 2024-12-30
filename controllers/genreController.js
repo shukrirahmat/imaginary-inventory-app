@@ -43,12 +43,7 @@ const createNewGenre = [
       });
     }
     await db.addNewGenre(toAdd);
-    const genres = await db.getAllGenres();
-    res.render("genreSettings", {
-      title: "Genre Settings",
-      genres,
-      addStatus: `Successfully added genre "${toAdd}"`,
-    });
+    res.redirect("/genre");
   }),
 ];
 
@@ -60,16 +55,11 @@ const deleteGenre = asyncHandler(async (req, res) => {
     return res.status(400).render("genreSettings", {
       title: "Genre Settings",
       genres,
-      rdStatus: `Cannot delete "${req.body.genreName}". There exists ${tiedRecords} records with this genre. \nDelete or edit the records first to make sure the genre is empty`,
+      rdStatus: `Cannot delete "${req.body.genreName}". There exists ${tiedRecords} records with this genre. \nDelete or edit the records first to make sure the genre is empty.`,
     });
   }
   await db.deleteGenre(id);
-  const genres = await db.getAllGenres();
-  res.render("genreSettings", {
-    title: "Genre Settings",
-    genres,
-    rdStatus: `Successfully deleted "${req.body.genreName}".`,
-  });
+  res.redirect("/genre")
 });
 
 const renameGenre = [
@@ -105,12 +95,7 @@ const renameGenre = [
       });
     }
     await db.renameGenre(newName, id);
-    const genres = await db.getAllGenres();
-    res.render("genreSettings", {
-      title: "Genre Settings",
-      genres,
-      rdStatus: `Renamed ${oldName} to ${newName}`,
-    });
+    res.redirect("/genre");
   }),
 ];
 

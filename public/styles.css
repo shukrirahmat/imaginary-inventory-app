@@ -17,6 +17,7 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -139,7 +140,7 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.recordEditForm {
+.recordEditDiv {
   flex: 1;
   background-color: rgba(0, 0, 0, 0);
   display: flex;
@@ -150,20 +151,21 @@ body {
 .recordEditButton,
 .confirmDeleteButton {
   border: none;
-  background-color: green;
   text-decoration: none;
   flex: 1;
   font-family: "PT Sans", sans-serif;
-  color: white;
-  font-weight: bold;
   font-size: 12px;
-  padding: 5px;
   border-radius: 5px;
+  background-color: white;
+  border: solid 1px black;
 }
 
 .recordEditButton:hover,
 .confirmDeleteButton:hover {
-  background-color: rgb(0, 108, 0);
+  background-color: green;
+  border: solid 1px green;
+  color: white;
+  cursor: pointer;
 }
 
 .recordDeleteButton,
@@ -171,23 +173,24 @@ body {
   border: none;
   text-decoration: none;
   flex: 1;
-  background-color: crimson;
   font-family: "PT Sans", sans-serif;
-  color: white;
-  font-weight: bold;
   font-size: 12px;
-  padding: 5px;
   border-radius: 5px;
+  background-color: white;
+  border: solid 1px black;
 }
 
 .recordDeleteButton:hover,
 .cancelDeleteButton:hover {
-  background-color: rgb(200, 0, 40);
+  background-color: crimson;
+  border: solid 1px crimson;
+  color: white;
+  cursor: pointer;
 }
 
 .cancelDeleteButton,
 .confirmDeleteButton {
-  padding: 5px 10px;
+  padding: 2px 8px;
 }
 
 .recordDeleteForm {
@@ -228,25 +231,27 @@ body {
 }
 
 .recordForm input {
-  padding: 5px;
-  font-size: 18px;
+  font-family: "PT Sans", sans-serif;
+  padding: 2px 5px;
 }
 
 .recordForm button {
   align-self: center;
   border: none;
-  background-color: rgb(15, 15, 15);
   text-decoration: none;
   font-family: "PT Sans", sans-serif;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 5px 15px;
+  background-color: white;
+  color: black;
+  border: solid 1px black;
+  padding: 2px 15px;
   border-radius: 5px;
 }
 
 .recordForm button:hover {
-  background-color: black;
+  background-color:rgb(15, 15, 15);
+  color: white;
+  border: solid 1px rgb(15, 15, 15);
+  cursor: pointer;
 }
 
 .recordForm .genreCheckboxes {
@@ -269,6 +274,137 @@ body {
     align-self: center;
     font-size: 20px;
 }
+
+.genreSetting .addGenreDiv {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.genreSetting .addGenreDiv input {
+  font-family: "PT Sans", sans-serif;
+  padding: 2px 5px;
+}
+
+.genreSetting .addGenreDiv form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.genreSetting .addGenreDiv form button {
+  align-self:stretch;
+  border: none;
+  text-decoration: none;
+  font-family: "PT Sans", sans-serif;
+  background-color: white;
+  color: black;
+  border: solid 1px black;
+  padding: 2px 15px;
+  border-radius: 5px;
+}
+
+.genreSetting .addGenreDiv form button:hover {
+  background-color:rgb(15, 15, 15);
+  color: white;
+  border: solid 1px rgb(15, 15, 15);
+  cursor: pointer;
+}
+
+.genreSetting .rdStatus {
+  white-space: pre-line;
+}
+
+.genreSetting .genreListDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: baseline;
+}
+
+.genreSetting .genreDivs {
+  display: grid;
+  grid-template-columns: 300px 100px 100px;
+  gap: 10px;
+  border: solid 1px black;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;
+  min-height: 50px;
+}
+
+.genreSetting .deleteBtnDiv {
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  background-color: aqua;
+}
+
+.genreSetting .renameButton {
+  border: none;
+  text-decoration: none;
+  flex: 1;
+  font-family: "PT Sans", sans-serif;
+  font-size: 12px;
+  border-radius: 5px;
+  background-color: white;
+  border: solid 1px black;
+  padding: 4px 8px;
+}
+
+.genreSetting .renameButton:hover {
+  background-color: green;
+  border: solid 1px green;
+  color: white;
+  cursor: pointer;
+}
+
+.genreSetting .deleteButton {
+  border: none;
+  text-decoration: none;
+  flex: 1;
+  font-family: "PT Sans", sans-serif;
+  font-size: 12px;
+  border-radius: 5px;
+  background-color: white;
+  border: solid 1px black;
+  padding: 4px 8px;
+}
+
+.genreSetting .deleteButton:hover {
+  background-color: crimson;
+  border: solid 1px crimson;
+  color: white;
+  cursor: pointer;
+}
+
+.genreSetting .genreRenameForm input {
+  font-family: "PT Sans", sans-serif;
+  padding: 2px 5px;
+}
+
+.genreSetting .genreRenameForm button {
+  border: none;
+  text-decoration: none;
+  flex: 1;
+  font-family: "PT Sans", sans-serif;
+  font-size: 12px;
+  border-radius: 5px;
+  background-color: white;
+  border: solid 1px black;
+  padding: 4px 8px;
+}
+
+.genreSetting .genreRenameForm button:hover {
+  background-color: green;
+  border: solid 1px green;
+  color: white;
+  cursor: pointer;
+}
+
 
 
 
@@ -294,8 +430,17 @@ body {
   display: none;
 }
 
-.recordEditForm.hide {
+.recordEditDiv.hide {
   display: none;
+}
+
+.genreName.hide {
+  display: none;
+}
+
+.renameButton.greyed:hover {
+  background-color: grey;
+  border: solid 1px grey;
 }
 
 /* MEDIA SETTINGS */

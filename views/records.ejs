@@ -26,7 +26,7 @@
           <p>Year: <%=record.year%></p>
           <p>Genre: <%=record.genre_str%></p>
           <div class="buttonContainer">
-            <form action="/record/editForm" class="recordEditForm" method="POST">
+            <form action="/record/editForm" class="recordEditDiv" method="POST">
               <input type="hidden" value="<%=record.id%>" name="id">
               <input type="hidden" value="<%=record.record_name%>" name="record_name">
               <input type="hidden" value="<%=record.artist%>" name="artist">
@@ -47,7 +47,11 @@
       <% }) %>
     </div>
 
-    <a class="returnLink" href="/">Return to Home</a>
+    <div class="returnLink">
+      <a href="/">Return Home</a>
+      <a href="/record/new">Add New Record</a>
+      <a href="/genre">Manage Genre</a>
+    </div>
   </div>
   <script>
     const recordDivs = document.querySelectorAll(".recordDivs");
@@ -55,7 +59,7 @@
       const delForm = div.querySelector(".recordDeleteForm");
       const delBtn = div.querySelector(".recordDeleteButton");
       const cancelBtn = div.querySelector(".cancelDeleteButton");
-      const editForm = div.querySelector(".recordEditForm");
+      const editForm = div.querySelector(".recordEditDiv");
       delBtn.addEventListener("click", (e) => {
         delForm.classList.toggle("show");
         delBtn.classList.toggle("hide");
