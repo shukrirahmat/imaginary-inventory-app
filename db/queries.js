@@ -37,6 +37,16 @@ async function getRecordsInGenre(genreId) {
   return { rows, rowCount };
 }
 
+async function getRecordFromId(id) {
+  const query = 
+  `
+  SELECT * FROM records
+  WHERE id = ${id}
+  `;
+  const {rows} = await pool.query(query);
+  return rows;
+}
+
 async function getAllGenres() {
   const { rows } = await pool.query("SELECT * FROM genres ORDER BY genre_name");
   return rows;
@@ -202,6 +212,7 @@ module.exports = {
   getAllRecords,
   getAllGenres,
   getRecordsInGenre,
+  getRecordFromId,
   getGenreListFromRecord,
   getGenreName,
   checkIfGenreExists,

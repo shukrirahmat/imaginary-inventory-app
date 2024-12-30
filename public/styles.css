@@ -425,6 +425,10 @@ body {
   gap: 10px;
 }
 
+.viewPage .recordDetails .buttonContainer {
+  margin-top: 10px;
+}
+
 
 
 

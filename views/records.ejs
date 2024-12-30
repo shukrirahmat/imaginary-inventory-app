@@ -19,23 +19,18 @@
     <div class="recordsContainer">
       <% locals.records.forEach((record) => { %>
       <div class="recordDivs">
-        <a href="/record/view/?id=<%=record.id%>&record_name=<%=record.record_name%>&artist=<%=record.artist%>&year=<%=record.year%>&imgurl=<%=record.imgurl%>&genre_str=<%=record.genre_str%>"><img src="<%=record.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" /></a>
+        <a href="/record/view/?id=<%=record.id%>&record_name=<%=record.record_name%>&artist=<%=record.artist%>&year=<%=record.year%>&imgurl=<%=record.imgurl%>&genre_str=<%=record.genre_str%>&prevPage=<%=prevPage %>"><img src="<%=record.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" /></a>
         <div class="recordDetails">
           <p><b><%=record.record_name%></b></p>
           <p>By: <%=record.artist%></p>
           <p>Year: <%=record.year%></p>
           <p>Genre: <%=record.genre_str%></p>
           <div class="buttonContainer">
-            <form action="/record/editForm" class="recordEditDiv" method="POST">
-              <input type="hidden" value="<%=record.id%>" name="id">
-              <input type="hidden" value="<%=record.record_name%>" name="record_name">
-              <input type="hidden" value="<%=record.artist%>" name="artist">
-              <input type="hidden" value="<%=record.year%>" name="year">
-              <input type="hidden" value="<%=record.imgurl%>" name="imgurl">
+            <form action="/record/editForm/<%=record.id%>" class="recordEditDiv" method="POST">
               <button class="recordEditButton">EDIT</button>
             </form>
-            <form action="/record/delete" method="POST" class="recordDeleteForm">
-              <input type="hidden" value="<%=record.id%>" name="deleteId">
+            <form action="/record/delete/<%=record.id%>" method="POST" class="recordDeleteForm">
+              <input type="hidden" name="prevPage" value="<%=prevPage %>">
               <p>Are you sure?</p>
               <button type="submit" class="confirmDeleteButton">YES</button>
               <button type="button" class="cancelDeleteButton">NO</button>

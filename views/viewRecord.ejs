@@ -18,6 +18,18 @@
         <p>By: <%=locals.artist%></p>
         <p>Year: <%=locals.year%></p>
         <p>Genre: <%=locals.genres%></p>
+        <div class="buttonContainer">
+          <form action="/record/editForm/<%=locals.id%>" class="recordEditDiv" method="POST">
+            <button class="recordEditButton">EDIT</button>
+          </form>
+          <form action="/record/delete/<%=locals.id%>" method="POST" class="recordDeleteForm">
+            <input type="hidden" name="prevPage" value="<%= prevPage %>">
+            <p>Are you sure?</p>
+            <button type="submit" class="confirmDeleteButton">YES</button>
+            <button type="button" class="cancelDeleteButton">NO</button>
+          </form>
+          <button class="recordDeleteButton">DELETE</button>
+        </div>
       </div>
     </div>
 
@@ -27,6 +39,25 @@
       <a href="/genre">Manage Genre</a>
     </div>
   </div>
+  <script>
+    const recordDivs = document.querySelectorAll(".recordDivs");
+    recordDivs.forEach((div, index) => {
+      const delForm = div.querySelector(".recordDeleteForm");
+      const delBtn = div.querySelector(".recordDeleteButton");
+      const cancelBtn = div.querySelector(".cancelDeleteButton");
+      const editForm = div.querySelector(".recordEditDiv");
+      delBtn.addEventListener("click", (e) => {
+        delForm.classList.toggle("show");
+        delBtn.classList.toggle("hide");
+        editForm.classList.toggle("hide");
+      });
+      cancelBtn.addEventListener("click", (e) => {
+        delForm.classList.toggle("show");
+        delBtn.classList.toggle("hide");
+        editForm.classList.toggle("hide");
+      })
+    })
+  </script>
 </body>
 
 </html>

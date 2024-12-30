@@ -9,6 +9,7 @@ const getAllRecords = asyncHandler(async (req, res) => {
     title: "All Records",
     records: result.rows,
     amount: result.rowCount,
+    prevPage: "all",
   });
 });
 
@@ -31,6 +32,7 @@ const getRecordsInGenre = asyncHandler(async (req, res) => {
     title: ` ${genreName} Records`,
     records: result.rows,
     amount: result.rowCount,
+    prevPage: `${genreId}`,
   });
 });
 
@@ -110,14 +112,18 @@ const showCreateSuccessPage = asyncHandler(async (req, res) => {
 });
 
 const deleteRecord = asyncHandler(async (req, res) => {
-  const deleteId = req.body.deleteId;
-  await db.deleteRecord(deleteId);
-  res.redirect(req.get("Referrer") || "/");
+  const {id} = req.params;
+  const {prevPage} = req.body;
+  await db.deleteRecord(id);
+  res.redirect(`/record/${prevPage}`);
 });
 
 const getEditPage = asyncHandler(async (req, res) => {
-  const defData = req.body;
-  let defGenres = await db.getGenreListFromRecord(defData.id);
+  const {id} = req.params;
+  const recordQuery = await db.getRecordFromId(id);
+  const record = recordQuery[0];
+
+  let defGenres = await db.getGenreListFromRecord(id);
   defGenres = defGenres.map((genre) => {
     return genre.genre_id;
   });
@@ -125,11 +131,11 @@ const getEditPage = asyncHandler(async (req, res) => {
   res.render("editRecord", {
     title: "Editing",
     genres,
-    defId: defData.id,
-    defName: defData.record_name,
-    defArtist: defData.artist,
-    defYear: defData.year,
-    defImgurl: defData.imgurl,
+    defId: record.id,
+    defName: record.record_name,
+    defArtist: record.artist,
+    defYear: record.year,
+    defImgurl: record.imgurl,
     defGenres,
   });
 });
@@ -199,13 +205,15 @@ const showEditSuccessPage = asyncHandler(async (req, res) => {
 })
 
 const viewRecord = asyncHandler(async (req, res) => {
-  const { record_name, artist, year, imgurl, genre_str } = req.query;
+  const { id, record_name, artist, year, imgurl, genre_str, prevPage} = req.query;
   res.render("viewRecord", {
+    id,
     record_name,
     artist,
     year,
     imgurl,
     genres: genre_str,
+    prevPage
   });
 });
 
