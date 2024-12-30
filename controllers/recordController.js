@@ -199,8 +199,14 @@ const showEditSuccessPage = asyncHandler(async (req, res) => {
 })
 
 const viewRecord = asyncHandler(async (req, res) => {
-  const record = req.query;
-  res.render("viewRecord", { title: record.record_name, record });
+  const { record_name, artist, year, imgurl, genre_str } = req.query;
+  res.render("viewRecord", {
+    record_name,
+    artist,
+    year,
+    imgurl,
+    genres: genre_str,
+  });
 });
 
 module.exports = {
