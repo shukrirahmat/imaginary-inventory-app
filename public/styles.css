@@ -275,6 +275,7 @@ body {
 .successPage .recordDivs {
     max-width: none;
     flex-direction: row;
+    gap: 25px;
 }
 
 .successPage .recordDetails {
@@ -425,10 +426,18 @@ body {
   gap: 10px;
 }
 
-.viewPage .recordDetails .buttonContainer {
-  margin-top: 10px;
+.viewPage .recordDetails {
+  flex: 1;
 }
 
+.viewPage .recordDetails .buttonContainer {
+  margin-top: 10px;
+  align-self: baseline;
+}
+
+.viewPage .recordDetails button {
+  width: 80px;
+}
 
 
 
@@ -469,6 +478,29 @@ body {
 
 /* MEDIA SETTINGS */
 
+@media (max-width: 700px) {
+
+  .successPage .recordDivs {
+    flex-direction: column;
+  }
+
+  .successPage .recordDivs img {
+    width: 70%;
+    height: auto;
+    align-self: center;
+  }
+
+  .successPage .recordDivs .recordDetails{
+    flex-direction: column;
+    align-self: stretch;
+    align-items: center;
+  }
+
+  .successPage .recordDivs .recordDetails .buttonContainer{
+    align-self: center;
+  }
+}
+
 @media (max-width: 600px) {
 
   .mainContent {
@@ -498,13 +530,11 @@ body {
     width: 60%;
   }
 
-  .successPage .recordDivs {
+  .returnLink {
     flex-direction: column;
-  }
-
-  .successPage .recordDivs img {
-    width: 70%;
-    height: auto;
+    gap: 10px;
+    padding: 40px 0;
     align-self: center;
+    align-items: center;
   }
 }
