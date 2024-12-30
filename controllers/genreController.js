@@ -55,7 +55,7 @@ const deleteGenre = asyncHandler(async (req, res) => {
     return res.status(400).render("genreSettings", {
       title: "Genre Settings",
       genres,
-      rdStatus: `Cannot delete "${req.body.genreName}". There exists ${tiedRecords} records with this genre. \nDelete or edit the records first to make sure the genre is empty.`,
+      rdStatus: `Cannot delete "${req.body.genreName}". There exists ${tiedRecords} record(s) within this genre. \nDelete or edit the record(s) first to make sure the genre is empty.`,
     });
   }
   await db.deleteGenre(id);

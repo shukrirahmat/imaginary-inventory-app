@@ -10,41 +10,58 @@
 
 <body>
   <%- include("partials/header.ejs") %>
-  <h1><%= title%></h1>
+  <div class="mainContent">
+    <h1><%= title%></h1>
 
-  <%- include("partials/errors.ejs") %>
-  <form action="/record/edit" method="POST">
+    <%- include("partials/errors.ejs") %>
+    <form action="/record/edit" method="POST" class="recordForm">
 
-    <!-- DEFAULT VALUE BEFORE EDIT -->
-    <input type="hidden" name="defId" value="<%=defId%>">
-    <input type="hidden" name="defName" value="<%=defName%>">
-    <input type="hidden" name="defArtist" value="<%=defArtist%>">
-    <input type="hidden" name="defYear" value="<%=defYear%>">
-    <input type="hidden" name="defImgurl" value="<%=defImgurl%>">
-    <% locals.defGenres.forEach((defg) => { %>
-    <input type="hidden" name="defGenres" value="<%=defg%>">
-    <%}) %>
-    <!-- DEFAULT VALUE BEFORE EDIT -->
+      <!-- DEFAULT VALUE BEFORE EDIT -->
+      <input type="hidden" name="defId" value="<%=defId%>">
+      <input type="hidden" name="defName" value="<%=defName%>">
+      <input type="hidden" name="defArtist" value="<%=defArtist%>">
+      <input type="hidden" name="defYear" value="<%=defYear%>">
+      <input type="hidden" name="defImgurl" value="<%=defImgurl%>">
+      <% locals.defGenres.forEach((defg) => { %>
+      <input type="hidden" name="defGenres" value="<%=defg%>">
+      <%}) %>
+      <!-- DEFAULT VALUE BEFORE EDIT -->
 
-    <label for="record_name">Title</label>
-    <input type="text" id="record_name" name="record_name" value="<%=defName%>">
-    <label for="artist">Artist</label>
-    <input type="text" id="artist" name="artist" value="<%=defArtist%>">
-    <label for="year">Year of Release</label>
-    <input type="number" id="year" name="year" value="<%=defYear%>">
-    <label for="imgurl">Cover Art Url</label>
-    <input type="text" id="imgurl" name="imgurl" value="<%=defImgurl%>">
-    <div class="genreCheckboxes">
-      <% locals.genres.forEach((genre) => { %>
-      <% if (locals.defGenres.includes(genre.id)) { %>
-      <label for="<%= genre.genre_name%>"> <input type="checkbox" id="<%= genre.genre_name%>" name="genres" value="<%= genre.id%>" checked="true"><%= genre.genre_name%></label>
-      <% } else { %>
-      <label for="<%= genre.genre_name%>"> <input type="checkbox" id="<%= genre.genre_name%>" name="genres" value="<%= genre.id%>"><%= genre.genre_name%></label>
-      <% }}) %>
+      <div>
+        <label for="record_name">Title</label>
+        <input type="text" id="record_name" name="record_name" value="<%=defName%>">
+      </div>
+      <div>
+        <label for="artist">Artist</label>
+        <input type="text" id="artist" name="artist" value="<%=defArtist%>">
+      </div>
+      <div>
+        <label for="year">Year of Release</label>
+        <input type="number" id="year" name="year" value="<%=defYear%>">
+      </div>
+      <div>
+        <label for="imgurl">Cover Art Url</label>
+        <input type="text" id="imgurl" name="imgurl" value="<%=defImgurl%>">
+      </div>
+      <div class="genreCheckboxes">
+        <% locals.genres.forEach((genre) => { %>
+        <div>
+          <% if (locals.defGenres.includes(genre.id)) { %>
+          <label for="<%= genre.genre_name%>"><%= genre.genre_name%></label> <input type="checkbox" id="<%= genre.genre_name%>" name="genres" value="<%= genre.id%>" checked="true">
+          <% } else { %>
+          <label for="<%= genre.genre_name%>"><%= genre.genre_name%></label> <input type="checkbox" id="<%= genre.genre_name%>" name="genres" value="<%= genre.id%>">
+          <% } %>
+        </div>
+        <% }) %>
+      </div>
+      <button>SAVE</button>
+    </form>
+    <div class="returnLink">
+      <a href="/">Return Home</a>
+      <a href="/record/new">Add New Record</a>
+      <a href="/genre">Manage Genre</a>
     </div>
-    <button>SAVE</button>
-  </form>
-  <a href="/">Return to Home</a>
+  </div>
 </body>
 
 </html>

@@ -261,6 +261,13 @@ body {
   gap: 15px;
 }
 
+.recordForm .genreCheckboxes > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+
 .errorList {
   padding: 0 20px;
 }
@@ -333,6 +340,12 @@ body {
   border-radius: 5px;
   align-items: center;
   min-height: 50px;
+}
+
+.genreSetting .genreDivs p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .genreSetting .deleteBtnDiv {
@@ -445,7 +458,12 @@ body {
 
 /* MEDIA SETTINGS */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
+
+  .mainContent {
+    padding: 50px 10px;
+  }
+
   .mainContent.indexPage {
     flex-direction: column;
     gap: 50px;
@@ -453,5 +471,19 @@ body {
 
   .mainContent.indexPage .leftIndex {
     border-right: none;
+  }
+
+  .genreSetting .genreDivs {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 5px;
+    width: 100%;
+
+  }
+  .genreSetting input {
+    flex:1;
+  }
+
+  .genreSetting .genreDivs input {
+    width: 60%;
   }
 }

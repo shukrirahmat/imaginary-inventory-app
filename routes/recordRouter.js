@@ -10,6 +10,7 @@ router.post("/editForm", recordController.getEditPage);
 router.get("/all", recordController.getAllRecords);
 router.get("/view", recordController.viewRecord);
 router.get("/createSuccess", recordController.showCreateSuccessPage);
+router.get("/editSuccess", recordController.showEditSuccessPage);
 router.get("/:genreId", recordController.getRecordsInGenre);
 
 module.exports = router;

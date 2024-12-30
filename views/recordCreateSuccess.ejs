@@ -11,7 +11,7 @@
 <body>
   <%- include("partials/header.ejs") %>
   <div class="mainContent successPage">
-    <h1>Successfully Added</h1>
+    <h1><%= locals.message%></h1>
     <div class="recordDivs">
       <img src="<%=locals.imgurl%>" alt="Cover" onerror="this.onerror=null;this.src='/assets/fallbackimg.jpeg';" width="200" height="200" />
       <div class="recordDetails">
@@ -24,7 +24,7 @@
 
     <div class="returnLink">
       <a href="/">Return Home</a>
-      <a href="/record/new">Add Another</a>
+      <a href="/record/new">Add New Record</a>
       <a href="/genre">Manage Genre</a>
     </div>
   </div>

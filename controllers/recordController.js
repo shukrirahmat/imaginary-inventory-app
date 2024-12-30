@@ -92,14 +92,15 @@ const createNewRecord = [
       year: req.body.year,
       imgurl: req.body.imgurl,
       genres: genreNamesStr,
-    })
+    });
     res.redirect(`/record/createSuccess/?${params.toString()}`);
   }),
 ];
 
-const showCreateSuccessPage = asyncHandler (async (req, res) => {
-  const {record_name, artist, year, imgurl, genres} = req.query;
+const showCreateSuccessPage = asyncHandler(async (req, res) => {
+  const { record_name, artist, year, imgurl, genres } = req.query;
   res.render("recordCreateSuccess", {
+    message: "Successfully added",
     record_name,
     artist,
     year,
@@ -174,20 +175,33 @@ const editRecord = [
         return `${genre.genre_name}`;
       })
       .join(", ");
-    res.render("editSuccess", {
+    const params = new URLSearchParams({
       record_name: req.body.record_name,
       artist: req.body.artist,
       year: req.body.year,
       imgurl: req.body.imgurl,
       genres: genreNamesStr,
-    });
+    })
+    res.redirect(`/record/editSuccess/?${params.toString()}`);
   }),
 ];
 
-const viewRecord = asyncHandler(async(req, res) => {
-  const record = req.query
-  res.render("viewRecord", {title: record.record_name, record})
+const showEditSuccessPage = asyncHandler(async (req, res) => {
+  const { record_name, artist, year, imgurl, genres } = req.query;
+  res.render("recordCreateSuccess", {
+    message: "Edit success",
+    record_name,
+    artist,
+    year,
+    imgurl,
+    genres,
+  });
 })
+
+const viewRecord = asyncHandler(async (req, res) => {
+  const record = req.query;
+  res.render("viewRecord", { title: record.record_name, record });
+});
 
 module.exports = {
   getAllRecords,
@@ -198,5 +212,6 @@ module.exports = {
   getEditPage,
   editRecord,
   viewRecord,
-  showCreateSuccessPage
+  showCreateSuccessPage,
+  showEditSuccessPage,
 };

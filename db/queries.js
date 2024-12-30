@@ -9,7 +9,7 @@ async function getAllRecords() {
     INNER JOIN genres
     ON genres.id = genre_id
     GROUP BY records.id, records.record_name, records.artist, records.year, records.imgurl
-    ORDER BY records.id;
+    ORDER BY records.artist;
     `;
   const { rows, rowCount } = await pool.query(query);
   return { rows, rowCount };
@@ -31,7 +31,7 @@ async function getRecordsInGenre(genreId) {
     INNER JOIN genres
     ON genre_id = genres.id
     WHERE genre_id = ${genreId}
-    ORDER BY newtable.id;
+    ORDER BY newtable.artist;
     `;
   const { rows, rowCount } = await pool.query(query);
   return { rows, rowCount };
