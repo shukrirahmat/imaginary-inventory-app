@@ -25,7 +25,7 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).render("errorPage", {title: "Error", error: err.message, code : err.statusCode || 500});
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
   console.log(`Listening to port ${PORT}`);
